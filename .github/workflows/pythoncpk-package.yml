@@ -1,0 +1,145 @@
+name: PythonCPK Package & Release
+
+on:
+  push:
+    tags:
+      - 'pythoncpk-v*'
+  # 手動觸發：只產生 Actions artifact，不建立 Release
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  # ─────────────────────────────────────────────
+  # Windows: 單一 EXE
+  # ─────────────────────────────────────────────
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: PythonCPK
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-pythoncpk-${{ hashFiles('PythonCPK/requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build Windows EXE
+        run: >
+          pyinstaller
+          --name PythonCPK
+          --onefile
+          --windowed
+          --collect-all PyQt6
+          app.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PythonCPK-windows-exe
+          path: PythonCPK/dist/PythonCPK.exe
+          if-no-files-found: error
+
+      # 只有 push pythoncpk-v* tag 時才發佈 Release；手動觸發時 ref 是分支，不能當 tag_name
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/pythoncpk-v')
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: PythonCPK/dist/PythonCPK.exe
+
+  # ─────────────────────────────────────────────
+  # Linux: AppImage
+  # ─────────────────────────────────────────────
+  build-linux:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: PythonCPK
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-pythoncpk-${{ hashFiles('PythonCPK/requirements.txt') }}
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            libgl1 libegl1 libglib2.0-0 \
+            libxcb-icccm4 libxcb-image0 libxcb-keysyms1 \
+            libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 \
+            libxcb-xkb1 libxkbcommon-x11-0
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build with PyInstaller
+        run: >
+          pyinstaller
+          --name PythonCPK
+          --onedir
+          --collect-all PyQt6
+          app.py
+
+      - name: Build AppImage
+        run: |
+          wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage \
+            -O appimagetool.AppImage
+          chmod +x appimagetool.AppImage
+
+          # AppDir 結構
+          mkdir -p AppDir/usr/bin
+          cp -r dist/PythonCPK/* AppDir/usr/bin/
+
+          # 圖示：優先用 assets/pythoncpk.png，否則用 Pillow 產生佔位圖
+          if [ -f "assets/pythoncpk.png" ]; then
+            cp assets/pythoncpk.png AppDir/pythoncpk.png
+          else
+            python -c "from PIL import Image, ImageDraw; img = Image.new('RGBA', (256, 256), (66, 133, 244, 255)); d = ImageDraw.Draw(img); d.ellipse([32, 32, 224, 224], fill=(255, 255, 255, 200)); img.save('AppDir/pythoncpk.png')"
+          fi
+
+          # .desktop（用 printf 避免 heredoc 縮排汙染）
+          printf '[Desktop Entry]\nName=PythonCPK\nExec=PythonCPK\nIcon=pythoncpk\nType=Application\nCategories=Utility;\n' \
+            > AppDir/PythonCPK.desktop
+
+          # AppRun（用 printf 避免 heredoc 縮排汙染）
+          printf '#!/bin/bash\nHERE="$(dirname "$(readlink -f "${0}")")"\nexec "$HERE/usr/bin/PythonCPK" "$@"\n' \
+            > AppDir/AppRun
+          chmod +x AppDir/AppRun
+
+          # APPIMAGE_EXTRACT_AND_RUN=1：CI 沒有 FUSE，不能掛載自身
+          APPIMAGE_EXTRACT_AND_RUN=1 ./appimagetool.AppImage AppDir PythonCPK-x86_64.AppImage
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PythonCPK-linux-appimage
+          path: PythonCPK/PythonCPK-x86_64.AppImage
+          if-no-files-found: error
+
+      # 只有 push pythoncpk-v* tag 時才發佈 Release；手動觸發時 ref 是分支，不能當 tag_name
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/pythoncpk-v')
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: PythonCPK/PythonCPK-x86_64.AppImage

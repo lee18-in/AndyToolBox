@@ -1,0 +1,117 @@
+name: QrcodeGenerator Package & Release
+
+on:
+  push:
+    tags:
+      - 'qrcode-v*'
+  # 手動觸發：只產生 Actions artifact，不建立 Release
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: QrcodeGenerator
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip (Windows)
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-qrcode-${{ hashFiles('QrcodeGenerator/requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build with PyInstaller (Windows)
+        run: pyinstaller --noconfirm --onefile --windowed --name "QrcodeGenerator" QrcodeGenerator.py
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: QrcodeGenerator-windows-exe
+          path: QrcodeGenerator/dist/QrcodeGenerator.exe
+          if-no-files-found: error
+
+      - name: Upload to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/qrcode-v')
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: QrcodeGenerator/dist/QrcodeGenerator.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: QrcodeGenerator
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip (Linux)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-qrcode-${{ hashFiles('QrcodeGenerator/requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build with PyInstaller (Linux)
+        run: pyinstaller --noconfirm --onedir --name "QrcodeGenerator" QrcodeGenerator.py
+
+      - name: Prepare AppDir
+        run: |
+          mkdir -p AppDir/usr/bin
+          cp -r dist/QrcodeGenerator/* AppDir/usr/bin/
+          cp assets/qrcodegenerator.png AppDir/
+          printf '[Desktop Entry]\nName=QrcodeGenerator\nExec=AppRun\nIcon=qrcodegenerator\nType=Application\nCategories=Utility;\n' > AppDir/QrcodeGenerator.desktop
+          printf '#!/bin/sh\nHERE="$(dirname "$(readlink -f "${0}")")"\nexec "${HERE}/usr/bin/QrcodeGenerator" "$@"\n' > AppDir/AppRun
+          chmod +x AppDir/AppRun
+
+      - name: Download appimagetool
+        run: |
+          wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool.AppImage
+          chmod +x appimagetool.AppImage
+
+      - name: Build AppImage
+        run: APPIMAGE_EXTRACT_AND_RUN=1 ./appimagetool.AppImage AppDir QrcodeGenerator-x86_64.AppImage
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: QrcodeGenerator-linux-appimage
+          path: QrcodeGenerator/QrcodeGenerator-x86_64.AppImage
+          if-no-files-found: error
+
+      - name: Upload to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/qrcode-v')
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: QrcodeGenerator/QrcodeGenerator-x86_64.AppImage
