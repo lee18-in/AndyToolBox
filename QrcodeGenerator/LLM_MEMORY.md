@@ -5,10 +5,10 @@
 ## A. 目前狀態(每次交接必更新)
 
 - 目前階段: maintain
-- 最後更新: 2026-11-24 16:07 / 當時階段: maintain
+- 最後更新: 2026-11-26 10:35 / 當時階段: maintain
 - 交接基準 commit: （初始提交：整併入 AndyToolBox 清零舊版控，首次接手請以 git log -1 覆蓋）
 - 進行中任務: 測試現有功能，邊用邊測發現並修復 bug
-- 阻塞點: 舊版控已清零（原 15:28 v15 已於母倉 15:54 簽結；2026-11-23 `COMPONENT_MAP`/`ARCHIVE` 補建與本次整併入 `AndyToolBox`、移轉 CI 至 `../.github/workflows/qrcode-package.yml` 與 `qrcode-v*` 合併待審）。
+- 阻塞點: 舊版控已清零（原 15:28 v15 已於母倉 15:54 簽結；2026-11-23 `COMPONENT_MAP`/`ARCHIVE` 補建與本次整併入 `AndyToolBox`、移轉 CI 至 `../.github/workflows/qrcode-package.yml` 與 `qrcode-v*` 合併待審）。；2026-11-24 16:07 初始整併待審下壓（commit `e97566f`）
 
 ## B. 規劃(規劃階段 [plan] 專屬區;狀態: 草稿 | 已定案)
 
@@ -30,6 +30,13 @@
 - [ ]
 
 ## C. 交接日誌(只追加,不刪改;最新在最上,每筆一個小節)
+
+### 2026-11-26 10:35 [maintain] Antigravity (Gemini 4 Neon)
+
+- 完成了什麼: 依 user「我看過 同步8倉後推」將本 dir `AGENTS.md` 自 Online v15 整份覆蓋升至 v16（精簡英文＋`ARCHIVE` 16 KB 索引規則；無模板外自訂規則；覆蓋前 hash `e97566f`）；原首筆待審依 §0 下壓入〈阻塞點〉並守原交接基準（user 明示 `>16 KB` `ARCHIVE` 索引留便宜模型另做）。為何改：全 8 倉同步 Online v16 憲法（D39）。
+- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 16`/`Playbook-Variant: online`，全文 `12,405 B`/93 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
+- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff e97566f..HEAD -- QrcodeGenerator` 核對 Online v16 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
+- 地雷警告: 依 user 明示同步後 push；依 §2.1 本 context 禁自審。
 
 ### 2026-11-24 16:07 [maintain] Antigravity (Gemini 4 Neon)
 

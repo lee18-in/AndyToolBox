@@ -5,10 +5,10 @@
 ## A. 目前狀態(每次交接必更新)
 
 - 目前階段: build
-- 最後更新: 2026-11-24 16:07 / 當時階段: maintain
+- 最後更新: 2026-11-26 10:35 / 當時階段: maintain
 - 交接基準 commit: （初始提交：整併入 AndyToolBox 清零舊版控，首次接手請以 git log -1 覆蓋）
 - 進行中任務: 把圓點改成像向日葵花蕊中的類菱形排列
-- 阻塞點: 舊版控已清零（原 15:28 v15 已於母倉 15:54 簽結；2026-11-23 `COMPONENT_MAP.md` 補建與本次整併入 `AndyToolBox` 合併待審）。
+- 阻塞點: 舊版控已清零（原 15:28 v15 已於母倉 15:54 簽結；2026-11-23 `COMPONENT_MAP.md` 補建與本次整併入 `AndyToolBox` 合併待審）。；2026-11-24 16:07 初始整併待審下壓（commit `e97566f`）
 
 ## B. 規劃(規劃階段 [plan] 專屬區;狀態: 草稿 | 已定案)
 
@@ -31,6 +31,13 @@
 - [ ]
 
 ## C. 交接日誌(只追加,不刪改;最新在最上,每筆一個小節)
+
+### 2026-11-26 10:35 [maintain] Antigravity (Gemini 4 Neon)
+
+- 完成了什麼: 依 user「我看過 同步8倉後推」將本 dir `AGENTS.md` 自 Online v15 整份覆蓋升至 v16（精簡英文＋`ARCHIVE` 16 KB 索引規則；無模板外自訂規則；覆蓋前 hash `e97566f`）；原首筆待審依 §0 下壓入〈阻塞點〉並守原交接基準；壓 07-06～09-08 舊日誌入〈已封存結論〉（user 明示 `>16 KB` `ARCHIVE` 索引留便宜模型另做）。為何改：全 8 倉同步 Online v16 憲法（D39）。
+- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 16`/`Playbook-Variant: online`，全文 `12,405 B`/93 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
+- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff e97566f..HEAD -- FibonacciSpiralDotPattern` 核對 Online v16 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
+- 地雷警告: 依 user 明示同步後 push；依 §2.1 本 context 禁自審。
 
 ### 2026-11-24 16:07 [maintain] Antigravity (Gemini 4 Neon)
 
@@ -95,34 +102,9 @@
 - 下一個 agent 該做什麼: 使用者明示推送到 GitHub（豁免本次審閱）。請後續接手的 agent 依各自專案階段推進任務。
 - 地雷警告: 無
 
-### 2026-09-08 23:00 [build] 使用工具: GitHub Copilot
-
-- 完成了什麼: 診斷 macOS 執行 `fibonacci_spiral.py` 時看似卡住的問題；確認阻塞發生在首次 `import matplotlib.pyplot` 的字型快取建立，Matplotlib 會呼叫 `system_profiler -xml SPFontsDataType` 掃描系統字型。快取 `/Users/winbug3/.matplotlib/fontlist-v390.json` 已建立，之後以 `.venv/bin/python -c "import matplotlib.pyplot as plt"` 驗證成功，耗時約 0.21 秒。
-- 下一個 agent 該做什麼: 無；再次遇到同樣訊息時先等待首次字型快取建立完成，不要中斷程序。
-- 地雷警告: 無程式碼變更；若首次建立被 `Ctrl-C` 中斷，下一次啟動可能會重新掃描字型。
-
-### 2026-08-25 17:14 [maintain] 使用工具: Claude Code
-
-- 完成了什麼: 依 Playbook Online v9 執行分支 C 升級（原版本 v2，無 `Playbook-Variant` 標記，§2 使用 commit 為交接機制，判定為 online 變體）：`AGENTS.md` 整份覆蓋至 v9 模板（新增交接基準 commit 機制、Review Loop 順序條款、巢狀範圍條款 §4、語言與編碼規範等；§5 早已指向 LLM_MEMORY，無需再搬遷）；A 區「最新 commit」欄改名為「交接基準 commit」；`scripts/hooks/pre-commit`、`commit-msg` 整份覆蓋為最新版，並執行 `git config core.hooksPath scripts/hooks`（先前檔案存在但從未啟用，等同 hook 從未真正生效過）；新增 `.gitattributes` 的 `scripts/hooks/* text eol=lf`；README.md 頂端補上語言與編碼規範引導行。覆蓋前 `AGENTS.md` 的舊版可用 `git show 20a8694:AGENTS.md` 找回。
-- 下一個 agent 該做什麼: 無（純框架升級，無程式碼邏輯變更）
-- 地雷警告: 無
-
-### 2026-07-06 19:39 [plan] 使用工具: Antigravity
-
-- 完成了什麼: 導入 Playbook v2 工作流，整份覆蓋 `AGENTS.md`，並將舊版 `AGENTS.md` 的專案技術脈絡搬遷至 `LLM_MEMORY.md` 區塊 E，建立 Git Hook 確保 commit 規範。
-- 下一個 agent 該做什麼: 無
-- 地雷警告: 無
-
-<!-- 範例格式,新條目複製此結構插入在本註解下方:
-
-### YYYY-MM-DD HH:MM [plan / build / maintain 擇一] 使用工具: <agent 名稱>
-
-- 完成了什麼:
-- 下一個 agent 該做什麼:
-- 地雷警告: 無
--->
-
 ## D. 已封存結論(自〈總結封存〉搬入,唯讀)
+
+- 2026-07-06～09-08：導入 Playbook v2 並於 08-25 升至 Online v9（補 hook 與 `.gitattributes`）；09-08 確認 macOS 首次 `import matplotlib.pyplot` 掃描系統字型快取屬正常等待行為（已入 `COMPONENT_MAP.md`）。
 
 ## E. 專案技術脈絡
 
