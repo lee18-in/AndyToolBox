@@ -7,11 +7,11 @@
 ## A. 目前狀態(每次交接必更新)
 
 - 目前階段: build
-- 最後更新: 2026-11-26 10:35 / 當時階段: maintain
+- 最後更新: 2026-11-26 10:51 / 當時階段: maintain
 - 交接基準 commit: （初始提交：整併入 AndyToolBox 清零舊版控，首次接手請以 git log -1 覆蓋）
 - 遠端狀態: 已整併入 `AndyToolBox/VoltMatch/` 隨新倉首推 `origin/main`（不記雜湊，見 AGENTS.md §2）
 - 進行中任務: 不同作業系統的uiux相容 畫面顯示 字形排版調整 for 不同作業系統(已完成 Circuit 電路圖區塊)
-- 阻塞點: 舊版控已清零（原 15:28 v15 已於母倉 15:54 簽結；07-26/07-29/09-12 歷史檢核點存 `ARCHIVE.md`；本次整併入 `AndyToolBox`、移轉 CI 至 `../.github/workflows/voltmatch-package.yml` 與 `voltmatch-v*`、依 4A 移除 `AppDir/` 並補 `.gitignore` 待審）。；2026-11-24 16:07 初始整併待審下壓（commit `e97566f`）
+- 阻塞點: 舊版控已清零（原 15:28 v15 已於母倉 15:54 簽結；07-26/07-29/09-12 歷史檢核點存 `ARCHIVE.md`；本次整併入 `AndyToolBox`、移轉 CI 至 `../.github/workflows/voltmatch-package.yml` 與 `voltmatch-v*`、依 4A 移除 `AppDir/` 並補 `.gitignore` 待審）。；2026-11-24 16:07 初始整併待審下壓（commit `e97566f`）；2026-11-26 10:35 v16 升級待審下壓（基準 `e97566f..HEAD -- VoltMatch`）
 
 ## B. 規劃(規劃階段 [plan] 專屬區;狀態: 草稿 | 已定案)
 
@@ -33,6 +33,13 @@
 - [ ]
 
 ## C. 交接日誌(只追加,不刪改;最新在最上,每筆一個小節)
+
+### 2026-11-26 10:51 [maintain] Antigravity (Gemini 4 Neon)
+
+- 完成了什麼: 依 user 授權與 Online v16 `B-Step 4` 於本 dir `ARCHIVE.md` 檔頭補建 `## 0. 索引總表`（15 筆，最新在上）；原首筆 v16 待審下壓入〈阻塞點〉並守原基準/階段/進行中任務。為何改：落實 `ARCHIVE.md > 16 KB` 防膨脹索引。
+- 驗證方式: `git diff --numstat -- VoltMatch/ARCHIVE.md` 驗 `+19/-0`（刪 0 行）；`python3` 驗 15/15 錨點精確命中；本檔 `<16 KB`、C 區 `<10 KB`、本筆 `<=1200 B`。
+- 下一個 agent 該做什麼: 純改 `ARCHIVE.md`＋`LLM_MEMORY.md` 屬 §2.1 免審；續待 new session 審結〈阻塞點〉未結待審。
+- 地雷警告: 未 push（待 user 明示）。
 
 ### 2026-11-26 10:35 [maintain] Antigravity (Gemini 4 Neon)
 

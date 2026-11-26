@@ -5,6 +5,25 @@
 > 依 `AGENTS.md` §0〈防膨脹維護〉封存。**封存前已確認各筆的不衰減知識（決策理由、環境條件、驗證結果）皆已萃取進 `COMPONENT_MAP.md` §6／§7／§8**，此處保留原文供考古，非現役資訊。
 > 摘要索引見 `LLM_MEMORY.md` §D。首次封存：2026-09-03；第二次封存：2026-11-18。
 
+## 0. 索引總表
+
+<!-- 格式：- YYYY-MM-DD[～MM-DD]｜#標籤1 #標籤2｜錨點：`標題或首句原文`｜極簡摘要(<=40字) -->
+- 2026-09-03｜#review #Playbook #v10 #hooks｜錨點：`2026-09-03 18:13 [build]`｜審閱 Playbook v10 升級通過並手動跑 hook 推上遠端
+- 2026-09-03｜#Playbook #v10 #COMPONENT_MAP #archive｜錨點：`2026-09-03 18:04 [build]`｜升級 AGENTS.md v10、重構 COMPONENT_MAP 並封存 10 筆日誌
+- 2026-09-03｜#COMPONENT_MAP #Playbook #archive #CRLF｜錨點：`已取代／歷史附帶發現（2026-11-18`｜原 COMPONENT_MAP §6/§8 已取代設計理由與實測附帶發現
+- 2026-09-03｜#COMPONENT_MAP #architecture #review｜錨點：`2026-09-03 11:26 [build]`｜建立 COMPONENT_MAP.md 草稿並更新交接基準 commit
+- 2026-08-27｜#binary #cleanup #VoltMatch.exe｜錨點：`2026-08-27 18:28 [build]`｜依指示自版控移除 24 MB bin/VoltMatch.exe
+- 2026-08-25｜#Playbook #v9 #hooks #review-loop｜錨點：`2026-08-25 16:04 [maintain]`｜升級 AGENTS.md 與 git hooks 至 Playbook v9 並改交接基準欄
+- 2026-08-24｜#docs #deploy #Linux #Windows｜錨點：`2026-08-24 [build] 使用工具`｜提交並推送環境部屬.md 的 Linux/Windows 文件更新
+- 2026-07-29｜#venv #gitignore #uv #cleanup｜錨點：`2026-07-29 17:33 [build]`｜.venv2 移出版控、.gitignore 加 .venv*/ 並本機裝 uv
+- 2026-07-26｜#CI #release #workflow #AppImage｜錨點：`2026-07-26 22:25 [build]`｜建置 tag v* 自動 Release workflow、更新 README 與版號
+- 2026-07-26｜#UI #CircuitCanvas #DPI #Linux｜錨點：`2026-07-26 21:55 [build]`｜修 Linux 電路圖字型裁切、加視窗下限與動態填滿高度
+- 2026-07-06｜#hooks #chmod #permissions｜錨點：`2026-07-06 18:10 [maintain]`｜提交 pre-commit/commit-msg 腳本 chmod +x 權限修復
+- 2026-07-06｜#Playbook #v2 #LLM_MEMORY｜錨點：`2026-07-06 18:05 [maintain]`｜升級 AGENTS.md v1→v2 並搬移技術脈絡至 LLM_MEMORY §E
+- 2026-07-06｜#hooks #verification #chmod｜錨點：`2026-07-06 18:00 [maintain]`｜修復 hooks 權限並驗證 pre-commit 與 commit-msg 攔截
+- 2026-07-06｜#Playbook #v1 #hooks #init｜錨點：`2026-07-06 16:50 [plan]`｜導入 Playbook v1 模板並啟用 scripts/hooks
+- 2026-07-05｜#workflow #init #AGENTS｜錨點：`2026-07-05 21:24 [build]`｜首次導入 AI agent workflow 建立 AGENTS/LLM_MEMORY 等檔
+
 ---
 
 ### 2026-09-03 18:13 [build] 使用工具: Claude Fable 5.1 (Cursor Cloud Agent)
