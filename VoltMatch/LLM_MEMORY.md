@@ -7,7 +7,7 @@
 ## A. 目前狀態(每次交接必更新)
 
 - 目前階段: build
-- 最後更新: 2026-11-26 10:51 / 當時階段: maintain
+- 最後更新: 2026-11-27 10:11 / 當時階段: maintain
 - 交接基準 commit: （初始提交：整併入 AndyToolBox 清零舊版控，首次接手請以 git log -1 覆蓋）
 - 遠端狀態: 已整併入 `AndyToolBox/VoltMatch/` 隨新倉首推 `origin/main`（不記雜湊，見 AGENTS.md §2）
 - 進行中任務: 不同作業系統的uiux相容 畫面顯示 字形排版調整 for 不同作業系統(已完成 Circuit 電路圖區塊)
@@ -34,6 +34,13 @@
 
 ## C. 交接日誌(只追加,不刪改;最新在最上,每筆一個小節)
 
+### 2026-11-27 10:11 [maintain] Antigravity (Gemini 4 Neon)
+
+- 完成了什麼: 依 user「推 全倉 套WF」將本 dir `AGENTS.md` 自 Online v16 整份覆蓋升至 v17（§5 禁假優缺點＋§1 `[build]` PDCA Act 閉環；無模板外自訂規則；覆蓋前 hash `611c967`），並依 §0 壓縮 10-22～11-24 舊升級日誌至〈D〉控 C 區 `<10 KB`；守原交接基準。為何改：全 8 倉同步 Online v17 憲法（D41）。
+- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 17`/`Playbook-Variant: online`，全文 `12,791 B`/93 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
+- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff 3bd0bf7..HEAD -- VoltMatch` 核對 Online v17 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
+- 地雷警告: 依 user 明示同步後 push；依 §2.1 本 context 禁自審。
+
 ### 2026-11-26 10:51 [maintain] Antigravity (Gemini 4 Neon)
 
 - 完成了什麼: 依 user 授權與 Online v16 `B-Step 4` 於本 dir `ARCHIVE.md` 檔頭補建 `## 0. 索引總表`（15 筆，最新在上）；原首筆 v16 待審下壓入〈阻塞點〉並守原基準/階段/進行中任務。為何改：落實 `ARCHIVE.md > 16 KB` 防膨脹索引。
@@ -55,55 +62,6 @@
 - 下一個 agent 該做什麼: 本次改動需要審閱：核對 `../.github/workflows/voltmatch-package.yml`、`AppDir/` 排除與 `COMPONENT_MAP.md` 更新。等待 new session（或 `/clear`）審閱。
 - 地雷警告: 舊 commit hash 已失效，首次審結請覆蓋新倉基準；本 context 禁自審。
 
-### 2026-11-24 15:28 [maintain] Antigravity (Gemini 4 Neon)
-
-- 完成了什麼: 依 user「再部屬12區」將本 dir `AGENTS.md` 自 Online v14 整份覆蓋升至 v15（無模板外自訂規則；覆蓋前 hash `dfaabc8`）；原首筆 v14 待審依 §0 下壓入〈阻塞點〉並守原交接基準。為何改：全 12 倉同步 Online v15 憲法（D38）。
-- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 15`/`Playbook-Variant: online`，全文 `10,219 B`/92 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<1200 B`。
-- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff b064f30..HEAD` 核對 Online v15 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
-- 地雷警告: 未 push；依 §2.1 本 context 禁自審。
-
-### 2026-11-24 14:07 [maintain] 使用工具: Antigravity (Gemini 4 Neon)
-
-- 完成了什麼: 依使用者「12全區佈署」指示將本目錄 `AGENTS.md` 自 Online v13 整份覆蓋升級至 v14（無模板外自訂規則；覆蓋前 hash `f21f89f`）；保留原交接基準待審。為何改：全 12 倉同步 Online v14 憲法。
-- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 14` 與 `Playbook-Variant: online`，全文 `10,191 B`/89 行與 `Andy_AI_AGENT_WorkFlow/AGENTS.md` 逐位元組一致。
-- 下一個 agent 該做什麼: 本次改動需要審閱：對照 Online v14 模板確認條文一致且 A 區進行中任務未遭改寫。等待 `new session`（或 `/clear` 清空 `context`，建議換模型）審閱。
-- 地雷警告: 未 push；依 §2.1 本 `context` 禁自審。
-
-### 2026-11-18 19:39 [maintain] 使用工具: Antigravity
-
-- 完成了什麼: 使用者於 2026-11-18 19:39 明示「我看過結案」，依 §2.1 正式簽結 v12／v13 憲法升級及 §0 分流（`COMPONENT_MAP.md`／`ARCHIVE.md`），自〈阻塞點〉移除（保留既有待決／待審項與原基準）。
-- 驗證方式: `git diff --name-only` 僅異動 `LLM_MEMORY.md`；純記憶更新免新審閱；C 區 `< 10 KB`。
-- 下一個 agent 該做什麼: 由新 session 批次審結 07-26、07-29 與 09-12 歷史待審。
-- 地雷警告: 無
-
-### 2026-11-18 16:59 [maintain] 使用工具: Antigravity
-
-- 完成了什麼: 依 AGENTS.md §0 防膨脹維護整理雙記憶檔：(1) `COMPONENT_MAP.md` 校正 #5／#13（記明 `e3090d2` `filter-repo` 已清歷史）與 §7 LF 實況，並將已取代 Playbook v10 歷史條目（#8–#12、附帶發現）移入 `ARCHIVE.md` 降至 16 KB 以下；(2) 將 2026-07-26～09-03 18:13 四筆舊日誌移入 `ARCHIVE.md` 並壓縮入〈D〉（待審檢查點保留於〈阻塞點〉）；(3) 2026-11-18 16:01 v13 待審下壓至〈阻塞點〉。為何改：雙檔超 10 KB／16 KB 門檻。
-- 驗證方式: `python3` 驗 `C. 交接日誌` 降至 4.4 KB（`<10KB`）、`COMPONENT_MAP.md` `<16KB`、本筆 `<1200B`。
-- 下一個 agent 該做什麼: 本次改動需要審閱：核對 `COMPONENT_MAP.md` 校正與分流無誤、且 `ARCHIVE.md` 完整留存 (1)(2) 待審原文（與〈阻塞點〉前次待審可批次審結）。等待 `new session` 審閱。
-- 地雷警告: 舊 SHA 因 `filter-repo` 失效；未 push。
-
-### 2026-11-18 16:01 [maintain] 使用工具: Antigravity
-
-- 完成了什麼: 依使用者指示將本目錄 `AGENTS.md` 自 Online v12 整份覆蓋升級至 v13（無模板外自訂規則；覆蓋前 hash `61c6934`）。為何改：同步全 12 專案憲法至 v13。
-- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 13` 與 `Playbook-Variant: online`，全文與 `Andy_AI_AGENT_WorkFlow/AGENTS.md` 一致。
-- 下一個 agent 該做什麼: 本次改動需要審閱：對照 Online v13 模板確認條文一致且 A 區進行中任務未遭改寫；並於〈阻塞點〉續列前次待審。等待 `new session` 審閱。
-- 地雷警告: `COMPONENT_MAP.md` 約 16.3 KB（>16 KB），接續工作須依 v13 §0 三向分流；〈交接日誌〉約 12.0 KB（>10 KB），接續工作須依 §0 壓縮
-
-### 2026-10-28 11:39 [maintain] 使用工具: Cursor Grok 4.7
-
-- 完成了什麼: 使用者指示把本目錄 AGENTS.md 從 online v11 整份覆蓋成 v12。與其他 v11 檔內容相同，沒有模板外自訂規則。覆蓋前 hash b064f30。
-- 驗證方式: 讀檔首兩行是 Playbook-Version: 12 與 Playbook-Variant: online，且有「## 6. 對人訂正」。
-- 下一個 agent 該做什麼: 本次改動需要審閱：對照 v12 模板，確認條文一致且 A 區進行中任務沒被改寫。等待新 session／新工具審閱。
-- 地雷警告: 無
-
-
-### 2026-10-22 11:15 [maintain] 使用工具: Cursor Auto
-
-- 完成了什麼: 依 AI_AGENT_Playbook_Online.md 將本目錄 AGENTS.md 自 v10 整份覆蓋升級至 v11（online）。覆蓋前 AGENTS.md hash: 2c02728（可用 `git show .md` 找回）。v11 重點：§0 接手環境自檢／驗證方式必填／待審下壓保護；§2.1 使用者簽結與批次審閱。
-- 驗證方式: 讀檔確認開頭 `<!-- Playbook-Version: 11 -->` 與 `<!-- Playbook-Variant: online -->`；內容含「接手環境自檢」「驗證方式」「待審下壓」「使用者簽結」。
-- 下一個 agent 該做什麼: 無（純憲法升級；若接手請依 §0 做 hooksPath 自檢）
-- 地雷警告: 無
 ### 2026-09-12 11:17 [build] 使用工具: Claude Opus 5 (Cursor)
 
 - 完成了什麼: 使用者裁示 A2（**明確保留 B2 AppDir/**）：`git filter-repo` 僅移除 `bin/VoltMatch*.AppImage`／`bin/*.exe`；AppDir/ 342 檔仍在版控。`.git` 95M→13M。
@@ -119,6 +77,8 @@
 ## D. 已封存結論(自〈總結封存〉搬入,唯讀)
 
 原文保留於 [`ARCHIVE.md`](./ARCHIVE.md)；不衰減知識已萃取至 [`COMPONENT_MAP.md`](./COMPONENT_MAP.md)。
+
+- **2026-10-22～11-24 [maintain]** Online v11→v15 歷次憲法升級與 11-18 §0 分流（均已簽結並由 v16/v17 覆蓋）。
 
 - **2026-09-03 18:13 [build]** 新 session 審閱通過 Playbook v10 升級（`0e0176e..HEAD`），細節見 `COMPONENT_MAP.md` §8。
 - **2026-09-03 18:04 [build]** `AGENTS.md` 升級至 Playbook v10、重構 `COMPONENT_MAP.md` 8 節並封存 10 筆舊日誌至 `ARCHIVE.md`。
