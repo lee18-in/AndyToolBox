@@ -5,10 +5,11 @@
 ## A. 目前狀態(每次交接必更新)
 
 - 目前階段: maintain
-- 最後更新: 2026-11-27 14:50 / 當時階段: maintain
+- 最後更新: 2026-11-27 21:45 / 當時階段: maintain
 - 交接基準 commit: （初始提交：整併 5 倉清零舊版控，首次接手請以 git log -1 覆蓋）
-- 進行中任務: 完成 5 工具整併為 AndyToolBox（1B/2B/3A/4A/5A）並推送至公開遠端倉，待 new session 審閱或 user 簽結。
+- 進行中任務: 完成 5 工具整併為 AndyToolBox（1B/2B/3A/4A/5A）並推送至公開遠端倉，待 new session 審閱或 user 簽結；已同步母倉 macOS Bash 3.2 相容版 `scripts/hooks/pre-commit`。
 - 阻塞點: 初始整併提交（5 工具搬遷、根/子三檔架構、3 支 monorepo CI workflow、VoltMatch 排除 AppDir）待審。；2026-11-24 16:06 初始整併待審下壓（commit `e97566f`）
+  - 2026-11-27 14:50 需要審閱（基準 `e97566f..HEAD`）：核對 `scripts/hooks/pre-commit` 與記憶清理未傷任何專案待審（commit `7a56b9c`）。
 ## B. 規劃(規劃階段 [plan] 專屬區;狀態: 已定案)
 
 ### B1. 架構決策(已定案後鎖定,建置/維運階段不得改)
@@ -33,6 +34,13 @@
 ## C. 交接日誌(只追加,不刪改;最新在最上,每筆一個小節)
 
 <!-- 規則見 AGENTS.md §0/§2；標題：### YYYY-MM-DD HH:MM [階段] <工具>；欄：完成了什麼/驗證方式/下一個 agent 該做什麼/地雷警告 -->
+
+### 2026-11-27 21:45 [maintain] Antigravity (Gemini 4 Hydrogen)
+
+- 完成了什麼: 依 user `1A` 全同步指示從母倉 `Andy_AI_AGENT_WorkFlow`（`36e5a6a`）同步修復 macOS Bash 3.2.57 相容性之 `scripts/hooks/pre-commit`（抽 `is_exempt_const_file()`），並依 §0 下壓 14:50 待審入〈阻塞點〉、守原初始基準。為何改：修復 macOS `/bin/sh` 語法錯阻塞提交。
+- 驗證方式: `cmp -s` 與母倉 `scripts/hooks/pre-commit` 一致（6,143 B）；`/bin/sh -n scripts/hooks/pre-commit` 通過；`hooksPath=scripts/hooks`；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
+- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff 7a56b9c..HEAD -- scripts/hooks/pre-commit` 核對與母倉逐 byte 一致並併審既有待審。等待 new session（或 `/clear` 清空 context）審閱。
+- 地雷警告: 依 user 1A 全同步帶待審推遠端（D42，push≠審結）；禁自審。
 
 ### 2026-11-27 14:50 [maintain] Antigravity (Gemini 4 Neon)
 
