@@ -5,17 +5,10 @@
 ## A. 目前狀態(每次交接必更新)
 
 - 目前階段: maintain
-- 最後更新: 2026-11-27 14:36 / 當時階段: maintain
+- 最後更新: 2026-11-27 14:50 / 當時階段: maintain
 - 交接基準 commit: （初始提交：整併 5 倉清零舊版控，首次接手請以 git log -1 覆蓋）
 - 進行中任務: 完成 5 工具整併為 AndyToolBox（1B/2B/3A/4A/5A）並推送至公開遠端倉，待 new session 審閱或 user 簽結。
-- 阻塞點: 初始整併提交（5 工具搬遷、根/子三檔架構、3 支 monorepo CI workflow、VoltMatch 排除 AppDir）待審。；2026-11-24 16:06 初始整併待審下壓（commit `e97566f`）；2026-11-26 10:35 v16 升級待審下壓（基準 `3bd0bf7..HEAD`）
-  - 2026-11-27 10:11 需要審閱（基準 `e97566f..HEAD`）：
-    ### 2026-11-27 10:11 [maintain] Antigravity (Gemini 4 Neon)
-
-    - 完成了什麼: 依 user「推 全倉 套WF」將本 dir `AGENTS.md` 自 Online v16 整份覆蓋升至 v17（§5 禁假優缺點＋§1 `[build]` PDCA Act 閉環；無模板外自訂規則；覆蓋前 hash `611c967`）；原首筆待審依 §0 下壓入〈阻塞點〉並守原交接基準。為何改：全 8 倉同步 Online v17 憲法（D41）。
-    - 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 17`/`Playbook-Variant: online`，全文 `12,791 B`/93 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
-    - 下一個 agent 該做什麼: 本次改動需要審閱：`git diff 3bd0bf7..HEAD` 核對 Online v17 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
-    - 地雷警告: 依 user 明示同步後 push；依 §2.1 本 context 禁自審。
+- 阻塞點: 初始整併提交（5 工具搬遷、根/子三檔架構、3 支 monorepo CI workflow、VoltMatch 排除 AppDir）待審。；2026-11-24 16:06 初始整併待審下壓（commit `e97566f`）
 ## B. 規劃(規劃階段 [plan] 專屬區;狀態: 已定案)
 
 ### B1. 架構決策(已定案後鎖定,建置/維運階段不得改)
@@ -41,26 +34,12 @@
 
 <!-- 規則見 AGENTS.md §0/§2；標題：### YYYY-MM-DD HH:MM [階段] <工具>；欄：完成了什麼/驗證方式/下一個 agent 該做什麼/地雷警告 -->
 
-### 2026-11-27 14:36 [maintain] Antigravity (Gemini 4 Neon)
+### 2026-11-27 14:50 [maintain] Antigravity (Gemini 4 Neon)
 
-- 完成了什麼: 依 [套WF] 執行 Branch C 升級；依 D42 整份覆蓋 Online v17→v18（舊版留存 Git hash `a66d289`）；原首筆待審依 §0 下壓入〈阻塞點〉並守原交接基準（守原初始整併基準）。
-- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 18`/`Playbook-Variant: online`，全文 `13,278 B`/95 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
-- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff e97566f..HEAD` 核對 Online v18 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
-- 地雷警告: 禁自審；未經 user 明示不 push；hooksPath 保留。
-
-### 2026-11-27 10:11 [maintain] Antigravity (Gemini 4 Neon)
-
-- 完成了什麼: 依 user「推 全倉 套WF」將本 dir `AGENTS.md` 自 Online v16 整份覆蓋升至 v17（§5 禁假優缺點＋§1 `[build]` PDCA Act 閉環；無模板外自訂規則；覆蓋前 hash `611c967`）；原首筆待審依 §0 下壓入〈阻塞點〉並守原交接基準。為何改：全 8 倉同步 Online v17 憲法（D41）。
-- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 17`/`Playbook-Variant: online`，全文 `12,791 B`/93 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
-- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff 3bd0bf7..HEAD` 核對 Online v17 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
-- 地雷警告: 依 user 明示同步後 push；依 §2.1 本 context 禁自審。
-
-### 2026-11-26 10:35 [maintain] Antigravity (Gemini 4 Neon)
-
-- 完成了什麼: 依 user「我看過 同步8倉後推」將本 dir `AGENTS.md` 自 Online v15 整份覆蓋升至 v16（精簡英文＋`ARCHIVE` 16 KB 索引規則；無模板外自訂規則；覆蓋前 hash `e97566f`）；原首筆待審依 §0 下壓入〈阻塞點〉並守原交接基準（user 明示 `>16 KB` `ARCHIVE` 索引留便宜模型另做）。為何改：全 8 倉同步 Online v16 憲法（D39）。
-- 驗證方式: `head -n 2 AGENTS.md` 為 `Playbook-Version: 16`/`Playbook-Variant: online`，全文 `12,405 B`/93 行與母倉逐 byte 一致；日誌 `<10 KB`、本檔 `<16 KB`、本筆 `<=1200 B`。
-- 下一個 agent 該做什麼: 本次改動需要審閱：`git diff e97566f..HEAD` 核對 Online v16 條文一致且 A 區進行中任務未改寫。等待 new session（或 `/clear` 清空 context，建議換模型）審閱。
-- 地雷警告: 依 user 明示同步後 push；依 §2.1 本 context 禁自審。
+- 完成了什麼: 依 user「開工 做完再推」將本倉全部工作流同步至 Online v19（D45 純憲法同步免寫記憶）並更新 `scripts/hooks/pre-commit`；依 user 指示清理 v10～v18 純升版洗版日誌與假下壓（保留全部實質專案紀錄與待審）。
+- 驗證方式: `AGENTS.md`（13,590 B/95L）與 `scripts/hooks/pre-commit` 與母倉逐 byte 一致；`workflow_scan` v19 clean、`check_hooks` OK、記憶檔全合規。
+- 下一個 agent 該做什麼: 本次改動需要審閱：核對 `scripts/hooks/pre-commit` 與記憶清理未傷任何專案待審（日後純同步憲法不再觸碰記憶檔）。等待 new session 審閱。
+- 地雷警告: 依 user 明示驗證後推送（D42，push≠審結）；禁自審。
 
 ### 2026-11-24 16:06 [maintain] Antigravity (Gemini 4 Neon)
 
